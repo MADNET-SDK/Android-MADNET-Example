@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mad="http://schemas.android.com/apk/lib/com.mad.ad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <com.mad.ad.AdStaticView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_centerInParent="true"
+        mad:autoload="true"
+        mad:dimension="MAD_SIZE_320x50"
+        mad:space_id="2" />
+    <!-- WARNING! Change test placement id to YOUR placement id! -->
+
+</RelativeLayout>

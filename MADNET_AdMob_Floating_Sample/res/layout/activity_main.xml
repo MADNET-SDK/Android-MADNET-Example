@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mad="http://schemas.android.com/apk/lib/com.mad.ad"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity" >
+
+    <com.mad.ad.AdMobFloatingLayout
+        android:id="@+id/adLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="e1a33043e60c4126"
+        mad:admobExtraLabel="mAdtestevent" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.mad.ad.AdMobFloatingLayout>
+
+</RelativeLayout>
