@@ -4,7 +4,6 @@ import com.mad.ad.AdStaticView;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 
 public class MainActivity extends Activity {
 
@@ -14,8 +13,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        //См. XML для редактирования параметров контейнера
         mAdView = (AdStaticView) findViewById(R.id.adView);
-
     }
 
     @Override
@@ -42,6 +42,9 @@ public class MainActivity extends Activity {
         mAdView.resume();
     }
 
+    //Здесь необязательно вызывать mAdView.resume() - т.к. при старте активити
+    //всё равно будет вызван onResume(). Двойной вызов resume() не приведет ни
+    //к каким последствиям.
     @Override
     protected void onStart() {
         super.onStart();

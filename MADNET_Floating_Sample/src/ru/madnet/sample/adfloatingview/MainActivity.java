@@ -15,44 +15,45 @@ import com.mad.ad.AdRequest;
 
 public class MainActivity extends Activity {
 
+    //Р­С‚Рё РїРѕР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅС‹ РёСЃРєР»СЋС‡РёС‚РµР»СЊРЅРѕ РІ С†РµР»СЏС… РїСЂРёРјРµСЂР° - РѕРЅРё РѕС‚РІРµС‡Р°СЋС‚ Р·Р°
+    //СЃРѕРґРµСЂР¶РёРјРѕРµ РґРµРјРѕРЅСЃС‚СЂРёСЂСѓРµРјРѕРіРѕ СЃРїРёСЃРєР°.
     private static final String DATA_KEY = "Data_key";
-    private static final int ROWS_NUMBER = 30;
-    private AdFloatingLayout mAdFloatingView;
-    private ListView mListView;
+    private static final int ROW_COUNT = 30;
     private String[] mFrom;
     private int[] mTo;
     private List<Map<String, String>> mDataList;
     private SimpleAdapter mAdapter;
+    
+    //РљРѕРјРїРѕРЅРµРЅС‚С‹, СЂРµР°Р»РёР·СѓСЋС‰РёРµ СЃРїРёСЃРѕРє Рё "РїР»Р°РІР°СЋС‰РёР№" Р±Р°РЅРЅРµСЂ (СЃРј. XML)
+    private AdFloatingLayout mAdFloatingView;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
         mListView = (ListView) findViewById(android.R.id.list);
         mAdFloatingView = (AdFloatingLayout) findViewById(R.id.adFloatingLayout);
 
-        // Если вы хотите расположить баннер по верхней границе, используйте
-        // AdFloatingView.IN_HEADER, если по верхней - AdFloatingView.IN_FOOTER.
+        //Р’ РґР°РЅРЅРѕРј РїСЂРёРјРµСЂРµ Р±Р°РЅРЅРµСЂ Р±СѓРґРµС‚ Р·Р°РєСЂРµРїР»РµРЅ РІ С€Р°РїРєРµ СЃРїРёСЃРєР°
         mAdFloatingView.setAdViewPlace(AdFloatingLayout.IN_HEADER);
 
-        // Используйте этот метод, чтобы показать/спрятать кнопку закрытия
-        // баннера
+        //Р’ РґР°РЅРЅРѕРј РїСЂРёРјРµСЂРµ Р±Р°РЅРЅРµСЂ РёРјРµРµС‚ РєРЅРѕРїРєСѓ Р·Р°РєСЂС‹С‚РёСЏ.
         mAdFloatingView.useCustomClose(true);
 
-        // Установите для AdFloatingView ваш ListView
+        //РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РїСЂРёРІСЏР·РєРё РєРѕРјРїРѕРЅРµРЅС‚РѕРІ ListView Рё AdFloatingLayout
         mAdFloatingView.setListView(mListView);
         mListView.setOnScrollListener(mAdFloatingView);
-
-        // Зафиксируйте компоненты
         mAdFloatingView.attachAdViewToContainer();
 
-        // Только после этих действий можно устанавливать адаптеры для ListView
-
+        //РЎР»РµРґСѓСЋС‰РёРµ 3 СЃС‚СЂРѕС‡РєРё - РіРµРЅРµСЂР°С†РёСЏ СЃС‚СЂРѕРє РґР»СЏ СЃРїРёСЃРєР°, СЃРґРµР»Р°РЅРѕ
+        //РёСЃРєР»СЋС‡РёС‚РµР»СЊРЅРѕ РґР»СЏ РїСЂРёРјРµСЂР°. Р—РґРµСЃСЊ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ Р’РђРЁ Р°РґР°РїС‚РµСЂ
         initAdaptersData();
         mAdapter = new SimpleAdapter(this, mDataList, android.R.layout.simple_list_item_1, mFrom, mTo);
         mListView.setAdapter(mAdapter);
-        // Запустите ротацию баннеров. Это можно сделать и позже.
+
+        //Р—Р°РїСѓСЃРєР°РµРј СЂРѕС‚Р°С†РёСЋ Р±Р°РЅРЅРµСЂРѕРІ
         mAdFloatingView.showBanners(new AdRequest.Builder().getRequest());
     }
 
@@ -63,7 +64,7 @@ public class MainActivity extends Activity {
 
         mDataList = new ArrayList<Map<String, String>>();
 
-        for (int i = 1; i < ROWS_NUMBER; i++) {
+        for (int i = 1; i < ROW_COUNT; i++) {
             Map<String, String> dataRow = new HashMap<String, String>();
             dataRow.put(DATA_KEY, i + " row");
             mDataList.add(dataRow);
