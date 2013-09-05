@@ -33,7 +33,7 @@
         <activity
             android:name="com.mad.view.OrmmaActionHandler"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-                <activity
+        <activity
             android:name="com.mad.ad.InterstitialActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
