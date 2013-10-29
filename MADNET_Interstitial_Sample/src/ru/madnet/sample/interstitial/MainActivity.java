@@ -12,13 +12,16 @@ import com.mad.ad.AdResponseStatus;
 
 public class MainActivity extends Activity implements AdInterstitialListener{
 
-    //ID для MADNET SDK, выдается на сайте MADNET
-    //ЗДЕСЬ ДОЛЖЕН БЫТЬ ВАШ MADNET ID
-    private static final String MADNET_SPACE_ID = "2";
+    @Deprecated
+    /*
+    FIXME - This is MADNET ad placement identifier. You should obtain your
+    own at MADNET site and replace current value by your placementID.
+    Annotation only to attract attention.
+    */
+    private static final String MADNET_SPACE_ID = "YOUR_MADNET_ID - take it from madnet site!";
     
-    //В данном примере будет использоваться тестовый режим
+    //Lets try testmode in this sample
     private static final boolean TEST_MODE = true;
-    private static final boolean DEBUG_MODE = TEST_MODE;
     
     private AdInterstitialView mView;
 
@@ -27,19 +30,26 @@ public class MainActivity extends Activity implements AdInterstitialListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mView = new AdInterstitialView(this, MADNET_SPACE_ID, TEST_MODE, DEBUG_MODE);
+        mView = new AdInterstitialView(this, MADNET_SPACE_ID, TEST_MODE);
         mView.loadBanner(new AdRequest.Builder().getRequest());
     }
 
     @Override
     public void onReady() {
+        /*Here you can make some prepartions before show
+        loaded interstitial. It can be useful, if device have bad connection with
+        internet - for example, it is too late to show banner and you can
+        avoid demonstration here by using "return"
+        */
         mView.showBanner();
     }
 
     @Override
-    public void onGetResponse(AdResponseStatus arg0) {
-        // Если вы хотите каким-то образом обработать результат ответа сервера,
-        // то сделать это можно здесь
+    public void onGetResponse(AdResponseStatus response) {
+        /*
+        Here you can handle response from server - for example, you can do
+        something, if "response == AdResponseStatus.RESPONSE_ERROR".
+        */
     }
 
     

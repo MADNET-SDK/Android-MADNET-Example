@@ -14,10 +14,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //См. XML для редактирования параметров контейнера
+        //FIXME - Look into XML (activity_main) to details!
         mAdView = (AdStaticView) findViewById(R.id.adView);
     }
 
+    /*
+     You should notify mAdView about lifecycle events to prevent
+     memory leaks ant unnecessary requests to server.
+     */   
     @Override
     protected void onDestroy() {
         mAdView.dismiss();
@@ -42,9 +46,6 @@ public class MainActivity extends Activity {
         mAdView.resume();
     }
 
-    //Здесь необязательно вызывать mAdView.resume() - т.к. при старте активити
-    //всё равно будет вызван onResume(). Двойной вызов resume() не приведет ни
-    //к каким последствиям.
     @Override
     protected void onStart() {
         super.onStart();

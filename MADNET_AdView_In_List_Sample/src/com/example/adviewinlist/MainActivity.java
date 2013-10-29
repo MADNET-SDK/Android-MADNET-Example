@@ -19,9 +19,9 @@ import java.util.Set;
 
 public class MainActivity extends Activity {
 
-    //Число строк в списке этого примера
+    //Row count of list - only as sample
     private static final int ROW_COUNT = 20;
-    //Содержимое строк списка
+    //Content of rows
     private List<String> mRows;
     
     private StandartBannerAdapter mListAdapter;
@@ -30,9 +30,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        //Lets generate some sample content!
         mRows = generateSampleRows();
-        ListView listView = ((ListView) findViewById(android.R.id.list));
         mListAdapter = new StandartBannerAdapter(this, android.R.layout.simple_list_item_1, mRows);
+        
+        ListView listView = ((ListView) findViewById(android.R.id.list));
         listView.setAdapter(mListAdapter);
     }
 
@@ -44,9 +47,10 @@ public class MainActivity extends Activity {
         return rows;
     }
 
-    //Аналогично обычному контейнеру, определяем поведение списка при изменении
-    //состояния ЖЦ активити - только в этом случае управление отдается адаптеру,
-    //чтобы он сам оповестил все используемые контейнеры
+    /*
+     You should notify adapter about lifecycle events to prevent
+     memory leaks ant unnecessary requests to server.
+     */ 
     @Override
     protected void onDestroy() {
         mListAdapter.dismiss();
@@ -71,18 +75,24 @@ public class MainActivity extends Activity {
         mListAdapter.pause();
     }
 
+    /**
+     * Class, that implements Array Adapter fuctionality with 
+     * injections of several advertisement rows.
+     */
     static class StandartBannerAdapter extends ArrayAdapter<String> {
 
-        //Простое разделение по типам ячеек - либо стандартная, либо рекламная
+        //Spliting our cells into two types: usual and advertisement
         private final int TYPE_CONTENT = 0;
         private final int TYPE_ADVIEW = 1;
         
-        private List<String> mRows;
-        private LayoutInflater mLayoutInflater;
+        private final List<String> mRows;
+        private final LayoutInflater mLayoutInflater;
         
-        //Адаптер будет хранить ссылки на все используемые рекламные контейнеры
-        //чтобы можно было их все разом поставить на паузу или уничтожить
-        private Set<AdStaticView> mAdViews = new HashSet<AdStaticView>();
+        /*
+        We should keep links to all advertisement containers - to let them
+        know, when they should be paused or destroyed
+        */
+        private final Set<AdStaticView> mAdViews = new HashSet<AdStaticView>();
 
         public StandartBannerAdapter(Context context, int layoutResourseId, List<String> rows) {
             super(context, layoutResourseId, rows);
@@ -90,8 +100,10 @@ public class MainActivity extends Activity {
             mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         
-        //Здесь своеобразный "фасад" для управления ЖЦ баннеров - 
-        //только действия применяются ко всем рекламным контейнерам списка
+        /*
+        There adapter delegates lifecycle event to ALL advertisement 
+        containers - no one should ignore this event.
+        */
         public void pause(){
             for (AdStaticView adView: mAdViews){
                 adView.pause();
@@ -117,14 +129,14 @@ public class MainActivity extends Activity {
 
         @Override
         public int getViewTypeCount() {
-            //Число разновидностей ячеек
-            //в данном примере их 2: обычные и рекламные
+            //count of row types - we have two (usual and advertisement)
             return 2;
         }
 
         @Override
         public int getItemViewType(int position) {
-            //Один из способов реализации периодичности рекламы в списке
+            //determines periodicy of advertisements in list - each fourth
+            //row, starting at index=2
             if (position % 4 == 2) {
                 return TYPE_ADVIEW;
             } else {
@@ -138,7 +150,8 @@ public class MainActivity extends Activity {
                 convertView = createView(position);   
             }
             Object holder = convertView.getTag();
-            //Выполнянем связывание только для обычных ячеек
+            
+            //For usual cells
             if (!(holder instanceof AdViewHolder)) {
                 String currentRowText = getItem(position);
                 ((ViewHolder) holder).textView.setText(currentRowText);
@@ -150,14 +163,13 @@ public class MainActivity extends Activity {
             int type = getItemViewType(position);
             switch (type) {
                 case TYPE_CONTENT: {
-                    //Ветка в данном примере идентична ветке default,
-                    //оставлено для целостности примера
                     return createItemView();
                 }
                 case TYPE_ADVIEW: {
                     return createAdView();
                 }
                 default: {
+                    //the same as TYPE_CONTENT - just a code-style "case"
                     return createItemView();
                 }
             }
@@ -168,8 +180,7 @@ public class MainActivity extends Activity {
             AdViewHolder holder = new AdViewHolder();
             adView.setTag(holder);     
             
-            //См. XML
-            //Регистрируем созданный рекламный контейнер в наборе нашего списка
+            //There we registering advertisement container in our "link keeper"
             mAdViews.add((AdStaticView) ((RelativeLayout) adView).findViewById(R.id.adView));  
             return adView;            
         }
@@ -183,16 +194,18 @@ public class MainActivity extends Activity {
         }
     }
 
-    //Класс-оболочка для обычной ячейки. В Вашем приложении он,
-    //вероятно, будет более разнообразен
+    /*
+    Simple holder for usual row - in Your app it can consist of much more
+    elements, not only the TextView
+    */
     private static class ViewHolder {
 
         TextView textView;
     }
 
-    //Класс-оболочка для рекламной ячейки. От него ничего не требуется, кроме
-    //предоставления возможности идентификации - в нашем примере это происходит
-    //путём проверки принадлжености ячейки к этому классу
+    /*
+    Wrapper for Ad-row element. Just to split classes.
+    */
     private static class AdViewHolder {
         
     }

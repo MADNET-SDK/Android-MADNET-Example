@@ -22,7 +22,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         mad:autoload="true"
-        mad:dimension="MAD_SIZE_320x50"            
-        mad:space_id="2" /><!-- WARNING! Change test placement id to YOUR placement id! -->
+        mad:dimension="MAD_SIZE_320x50"  
+                  
+        mad:space_id="YOUR_MADNET_ID - take it from madnet site!" />
+        <!-- WARNING! Change test placement id to YOUR placement id! -->
 
 </RelativeLayout>

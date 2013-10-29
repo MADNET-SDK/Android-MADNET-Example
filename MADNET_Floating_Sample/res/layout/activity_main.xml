@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         mad:dimension="MAD_SIZE_320x50"
-        mad:space_id="2" >
+        
+        mad:space_id="YOUR_MADNET_ID - take it from madnet site!" >
+        <!-- WARNING! Change test placement id to YOUR placement id! -->
 
         <ListView
             android:id="@android:id/list"

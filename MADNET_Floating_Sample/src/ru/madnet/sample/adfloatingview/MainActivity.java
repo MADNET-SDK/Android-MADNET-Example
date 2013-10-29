@@ -15,16 +15,15 @@ import com.mad.ad.AdRequest;
 
 public class MainActivity extends Activity {
 
-    //Эти поля использованы исключительно в целях примера - они отвечают за
-    //содержимое демонстрируемого списка.
-    private static final String DATA_KEY = "Data_key";
+    //Fields to implement sample list with some content
     private static final int ROW_COUNT = 30;
+    private static final String DATA_KEY = "Data_key";
     private String[] mFrom;
     private int[] mTo;
     private List<Map<String, String>> mDataList;
     private SimpleAdapter mAdapter;
     
-    //Компоненты, реализующие список и "плавающий" баннер (см. XML)
+    //Floating banner components - look into XML (activity_main) for details
     private AdFloatingLayout mAdFloatingView;
     private ListView mListView;
 
@@ -36,27 +35,27 @@ public class MainActivity extends Activity {
         mListView = (ListView) findViewById(android.R.id.list);
         mAdFloatingView = (AdFloatingLayout) findViewById(R.id.adFloatingLayout);
 
-        //В данном примере баннер будет закреплен в шапке списка
+        //Banner will be attached to the "top" of the list
         mAdFloatingView.setAdViewPlace(AdFloatingLayout.IN_HEADER);
 
-        //В данном примере баннер имеет кнопку закрытия.
+        //Makes "close button" enabled
         mAdFloatingView.useCustomClose(true);
 
-        //Стандартная процедура привязки компонентов ListView и AdFloatingLayout
+        //Linking ListView and AdFloatingLayout...
         mAdFloatingView.setListView(mListView);
         mListView.setOnScrollListener(mAdFloatingView);
         mAdFloatingView.attachAdViewToContainer();
 
-        //Следующие 3 строчки - генерация строк для списка, сделано
-        //исключительно для примера. Здесь должен быть ВАШ адаптер
+        //Generating smaple content of list view
         initAdaptersData();
         mAdapter = new SimpleAdapter(this, mDataList, android.R.layout.simple_list_item_1, mFrom, mTo);
         mListView.setAdapter(mAdapter);
 
-        //Запускаем ротацию баннеров
+        //Starting rotation
         mAdFloatingView.showBanners(new AdRequest.Builder().getRequest());
     }
 
+    //Sample content generation for list
     private void initAdaptersData() {
 
         mFrom = new String[] { DATA_KEY };
@@ -72,6 +71,10 @@ public class MainActivity extends Activity {
 
     }
 
+    /*
+     You should notify floating view about lifecycle events to prevent
+     memory leaks ant unnecessary requests to server.
+     */  
     @Override
     protected void onDestroy() {
         mAdFloatingView.dismiss();
