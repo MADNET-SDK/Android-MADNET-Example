@@ -1,18 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+	xmlns:mad="http://schemas.android.com/apk/lib/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".MainActivity" >
 
-    <com.mad.ad.AdFloatingLayout
-        xmlns:mad="http://schemas.android.com/apk/lib/com.mad.ad"
+    <com.madnet.ads.AdFloatingLayout
         android:id="@+id/adFloatingLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        mad:dimension="MAD_SIZE_320x50"
-        
+        mad:dimension="MAD_SIZE_320x50"        
+        mad:testmode = "true"
         mad:space_id="YOUR_MADNET_ID - take it from madnet site!" >
         <!-- WARNING! Change test placement id to YOUR placement id! -->
 
@@ -21,6 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbarStyle="outsideOverlay" />
-    </com.mad.ad.AdFloatingLayout>
+    </com.madnet.ads.AdFloatingLayout>
 
 </RelativeLayout>

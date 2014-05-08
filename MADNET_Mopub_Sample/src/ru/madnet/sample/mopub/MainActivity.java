@@ -1,12 +1,12 @@
 package ru.madnet.sample.mopub;
 
-import ru.madnet.sample.admobsample.R;
+import ru.madnet.sample.mopub.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
+import com.madnet.ads.Dimension;
+import com.madnet.ads.mediation.mopub.AdMopubMadAdapter;
 
-import com.mad.ad.AdMopubMadAdapter;
-import com.mad.ad.Dimension;
 import com.mopub.mobileads.MoPubView;
 import java.util.Map;
 
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         //Use here size, specified at MoPub site to this MoPud unit ID
-        mMopubAdapter = new AdMopubMadAdapter(this, Dimension.MAD_SIZE_320x50, MADNET_SPACE_ID);
+        mMopubAdapter = new AdMopubMadAdapter(this, Dimension.MAD_SIZE_320x50, MADNET_SPACE_ID, true);
         
         mMopubView = new MoPubView(this);
         mMopubView.setAdUnitId(MOPUB_UNIT_ID); 

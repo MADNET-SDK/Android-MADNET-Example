@@ -9,22 +9,24 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 import com.google.ads.mediation.customevent.CustomEventExtras;
-import com.mad.ad.AdMobMadAdapter;
-import com.mad.ad.Dimension;
+import com.madnet.ads.Dimension;
+import com.madnet.ads.mediation.admob.AdMobMadAdapter;
 
 public class MainActivity extends Activity {
 
+	@Deprecated
     /*
     This is label of AdMob custom event. You should specify it as a
-    labled's name at AdMob site.
+    labled's name at AdMob site (label's name can differs from "some_fake_label",
+	but MUST match with value, specified at AdMob size).
     */
-    private static final String ADMOB_CUSTOM_EVENT_LABEL = "MADNET_CUSTOM_EVENT_LABEL";
-    
+    private static final String ADMOB_CUSTOM_EVENT_LABEL = "some_fake_label";
+	
     @Deprecated
     /*
     FIXME - This is an AdMob mediation ID - you should take it at AdMob site.
     Annotation only to attract attention.
-    */
+    */	
     private static final String ADMOB_MEDIATION_ID = "YOUR_ADMOB_MEDIATION_ID - take it from Admob site!";
     
     @Deprecated
@@ -33,7 +35,7 @@ public class MainActivity extends Activity {
     own at MADNET site and replace current value by your placementID.
     Annotation only to attract attention.
     */
-    private static final String MADNET_SPACE_ID = "YOUR_MADNET_ID - take it from madnet site!"; 
+	private static final String MADNET_SPACE_ID = "YOUR_MADNET_ID - take it from madnet site!"; 
    
     private AdMobMadAdapter mAdMobMadAdapter;
 
@@ -46,19 +48,17 @@ public class MainActivity extends Activity {
         AdMob AdSize.BANNER. To use other banner sizes, you should specify
         matching size of AdMob and MADNET for best performance*/
         AdView admobview = new AdView(this, AdSize.BANNER, ADMOB_MEDIATION_ID);
-        mAdMobMadAdapter = new AdMobMadAdapter(this, Dimension.MAD_SIZE_320x50, MADNET_SPACE_ID);
-        
-        CustomEventExtras extra = new CustomEventExtras().addExtra(ADMOB_CUSTOM_EVENT_LABEL, mAdMobMadAdapter);        
+        mAdMobMadAdapter = new AdMobMadAdapter(this, Dimension.MAD_SIZE_320x50, MADNET_SPACE_ID, true);        
 
         RelativeLayout layout = (RelativeLayout)findViewById(R.id.main_layout);        
         layout.addView(admobview);
         
         /*Do not forget to add MADNET adapter as extra part of request!*/
+        CustomEventExtras extra = new CustomEventExtras().addExtra(ADMOB_CUSTOM_EVENT_LABEL, mAdMobMadAdapter);        
         admobview.loadAd(new AdRequest().setNetworkExtras(extra));
 
     }
-    
-    
+
     /*
      You should notify adapter about lifecycle events to prevent
      memory leaks ant unnecessary requests to server.

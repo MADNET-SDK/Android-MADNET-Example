@@ -5,12 +5,12 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.example.madnetinterstitialsample.R;
-import com.mad.ad.AdInterstitialView;
-import com.mad.ad.AdInterstitialView.AdInterstitialListener;
-import com.mad.ad.AdRequest;
-import com.mad.ad.AdResponseStatus;
+import com.madnet.ads.AdInterstitialView;
+import com.madnet.ads.AdInterstitialView.AdInterstitialListener;
+import com.madnet.ads.AdRequest;
+import com.madnet.ads.AdResponseStatus;
 
-public class MainActivity extends Activity implements AdInterstitialListener{
+public class MainActivity extends Activity implements AdInterstitialListener {
 
     @Deprecated
     /*

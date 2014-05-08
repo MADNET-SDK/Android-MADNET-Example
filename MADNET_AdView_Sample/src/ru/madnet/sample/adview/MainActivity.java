@@ -1,9 +1,8 @@
 package ru.madnet.sample.adview;
 
-import com.mad.ad.AdStaticView;
-
 import android.os.Bundle;
 import android.app.Activity;
+import com.madnet.ads.AdStaticView;
 
 public class MainActivity extends Activity {
 

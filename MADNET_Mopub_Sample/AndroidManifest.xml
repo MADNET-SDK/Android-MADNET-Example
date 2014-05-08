@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.madnet.sample.admobsample"
+    package="ru.madnet.sample.mopub"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -28,14 +28,13 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.mad.ad.ImageActivity" >
+        <activity android:name="com.madnet.activity.ImageActivity" >
         </activity>
-        
         <activity
-            android:name="com.mad.view.Browser"
+            android:name="com.madnet.activity.Browser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name="com.mad.view.OrmmaActionHandler"
+            android:name="com.madnet.ormma.OrmmaActionHandler"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
             android:name="com.google.ads.AdActivity"

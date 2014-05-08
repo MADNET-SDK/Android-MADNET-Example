@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.mad.ad.AdStaticView;
+import com.madnet.ads.AdStaticView;
 import java.util.HashSet;
 import java.util.Set;
 

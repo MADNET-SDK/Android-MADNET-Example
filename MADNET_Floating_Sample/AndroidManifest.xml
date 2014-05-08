@@ -26,14 +26,13 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.mad.ad.ImageActivity" >
+        <activity android:name="com.madnet.activity.ImageActivity" >
         </activity>
-        
         <activity
-            android:name="com.mad.view.Browser"
+            android:name="com.madnet.activity.Browser"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <activity
-            android:name="com.mad.view.OrmmaActionHandler"
+            android:name="com.madnet.ormma.OrmmaActionHandler"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
    
     </application>

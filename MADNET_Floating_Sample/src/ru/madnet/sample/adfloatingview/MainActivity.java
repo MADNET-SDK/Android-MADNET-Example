@@ -9,9 +9,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
-import com.mad.ad.AdFloatingLayout;
-import com.mad.ad.AdRequest;
+import com.madnet.ads.AdFloatingLayout;
+import com.madnet.ads.AdRequest;
 
 public class MainActivity extends Activity {
 
@@ -36,17 +35,9 @@ public class MainActivity extends Activity {
         mAdFloatingView = (AdFloatingLayout) findViewById(R.id.adFloatingLayout);
 
         //Banner will be attached to the "top" of the list
-        mAdFloatingView.setAdViewPlace(AdFloatingLayout.IN_HEADER);
+		mAdFloatingView.setupAd(mListView, AdFloatingLayout.IN_HEADER, true); 
 
-        //Makes "close button" enabled
-        mAdFloatingView.useCustomClose(true);
-
-        //Linking ListView and AdFloatingLayout...
-        mAdFloatingView.setListView(mListView);
-        mListView.setOnScrollListener(mAdFloatingView);
-        mAdFloatingView.attachAdViewToContainer();
-
-        //Generating smaple content of list view
+        //Generating sample content of list view
         initAdaptersData();
         mAdapter = new SimpleAdapter(this, mDataList, android.R.layout.simple_list_item_1, mFrom, mTo);
         mListView.setAdapter(mAdapter);
