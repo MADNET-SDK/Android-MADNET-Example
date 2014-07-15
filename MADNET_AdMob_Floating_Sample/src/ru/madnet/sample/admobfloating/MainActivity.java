@@ -12,6 +12,11 @@ import android.widget.SimpleAdapter;
 import com.madnet.ads.mediation.admob.AdMobFloatingLayout;
 import com.madnet.ads.mediation.admob.AdMobMadAdapter;
 
+/**
+ * WARNING! Example actual until 1 august 2014.
+ * DO NOT use legacy admob, it will be replaced by Google Play Services.
+ * Instead this sample look at "MADNET GooglePlayServices AdMob Floating Sample" in Git.
+ */
 public class MainActivity extends Activity {    
     
     //List and floating banner components (look in XML)
@@ -55,7 +60,7 @@ public class MainActivity extends Activity {
         mAdapter = new SimpleAdapter(this, mDataList, android.R.layout.simple_list_item_1, mFrom, mTo);
         mListView.setAdapter(mAdapter);
 
-        mAdView.showBanners(new com.google.ads.AdRequest());
+        mAdView.showBanners();
     }
 
     private void initAdaptersData() {

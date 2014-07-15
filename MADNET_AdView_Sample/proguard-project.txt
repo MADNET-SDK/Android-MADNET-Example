@@ -18,3 +18,13 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep public class com.madnet.** {
+	public *;	
+	protected *;
+}
+
+-keepclassmembers class com.madnet.** {
+	public *;
+	protected *;
+}

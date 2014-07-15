@@ -1,17 +1,19 @@
 package ru.madnet.sample.admob;
 
-import ru.madnet.sample.admobsample.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
-
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
-import com.google.ads.mediation.customevent.CustomEventExtras;
-import com.madnet.ads.Dimension;
 import com.madnet.ads.mediation.admob.AdMobMadAdapter;
+import ru.madnet.sample.admobsample.R;
 
+/**
+ * WARNING! Example actual until 1 august 2014.
+ * DO NOT use legacy admob, it will be replaced by Google Play Services.
+ * Instead this sample look at "MADNET GooglePlayServices AdMob Sample" in Git.
+ */
 public class MainActivity extends Activity {
 
 	@Deprecated
@@ -48,15 +50,12 @@ public class MainActivity extends Activity {
         AdMob AdSize.BANNER. To use other banner sizes, you should specify
         matching size of AdMob and MADNET for best performance*/
         AdView admobview = new AdView(this, AdSize.BANNER, ADMOB_MEDIATION_ID);
-        mAdMobMadAdapter = new AdMobMadAdapter(this, Dimension.MAD_SIZE_320x50, MADNET_SPACE_ID, true);        
+        mAdMobMadAdapter = new AdMobMadAdapter(admobview, this, AdSize.BANNER, ADMOB_CUSTOM_EVENT_LABEL, MADNET_SPACE_ID, true);        
 
         RelativeLayout layout = (RelativeLayout)findViewById(R.id.main_layout);        
         layout.addView(admobview);
         
-        /*Do not forget to add MADNET adapter as extra part of request!*/
-        CustomEventExtras extra = new CustomEventExtras().addExtra(ADMOB_CUSTOM_EVENT_LABEL, mAdMobMadAdapter);        
-        admobview.loadAd(new AdRequest().setNetworkExtras(extra));
-
+        mAdMobMadAdapter.showBanners(new AdRequest()); 
     }
 
     /*
