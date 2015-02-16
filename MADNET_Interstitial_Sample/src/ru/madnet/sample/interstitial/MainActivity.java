@@ -3,8 +3,8 @@ package ru.madnet.sample.interstitial;
 
 import android.app.Activity;
 import android.os.Bundle;
+import ru.madnet.sample.interstitial.R;
 
-import com.example.madnetinterstitialsample.R;
 import com.madnet.ads.AdInterstitialView;
 import com.madnet.ads.AdInterstitialView.AdInterstitialListener;
 import com.madnet.ads.AdRequest;

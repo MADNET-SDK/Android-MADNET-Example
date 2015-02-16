@@ -2,6 +2,7 @@ package ru.madnet.sample.adview;
 
 import android.os.Bundle;
 import android.app.Activity;
+import com.madnet.ads.AdRequest;
 import com.madnet.ads.AdStaticView;
 
 public class MainActivity extends Activity {
@@ -12,7 +13,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
         //FIXME - Look into XML (activity_main) to details!
         mAdView = (AdStaticView) findViewById(R.id.adView);
     }

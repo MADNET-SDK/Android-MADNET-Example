@@ -1,9 +1,0 @@
--keep public class com.madnet.** {
-	public *;	
-	protected *;
-}
-
--keepclassmembers class com.madnet.** {
-	public *;
-	protected *;
-}
